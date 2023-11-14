@@ -1,5 +1,6 @@
 const redux = require("redux");
 const createStore = redux.createStore;
+const bindActionCreators = redux.bindActionCreators;
 
 // Define action type as a variable
 const CAKE_ORDERED = "CAKE_ORDERED";
@@ -37,6 +38,11 @@ store.dispatch(orderCake());
 store.dispatch(orderCake());
 store.dispatch(orderCake());
 store.dispatch(restockCake(3));
-
+//  instead of dispatch actions
+const action = bindActionCreators({ orderCake, restockCake }, store.dispatch);
+action.orderCake();
+action.orderCake();
+action.orderCake();
+action.restockCake(3);
 // Unsubscribe from state changes
 unsubscribe();
