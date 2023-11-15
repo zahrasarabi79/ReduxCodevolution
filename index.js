@@ -2,7 +2,9 @@ const redux = require("redux");
 const createStore = redux.createStore;
 const bindActionCreators = redux.bindActionCreators;
 const combineReducers = redux.combineReducers;
-
+const reduxLogger = require("redux-logger");
+const logger = reduxLogger.createLogger();
+const applyMiddleware = redux.applyMiddleware;
 // Define action type as a variable
 const CAKE_ORDERED = "CAKE_ORDERED";
 const CAKE_RESTOCKED = "CAKE_RESTOCKED";
@@ -61,17 +63,18 @@ const iceCreamReducer = (state = initialStateIceCream, action) => {
 const rootReducer = combineReducers({ cake: cakeReducer, iceCream: iceCreamReducer });
 
 // Create Redux store with the rootReducer
-const store = createStore(rootReducer);
-
-
+// const store = createStore(rootReducer);
+// Create Redux store with the rootReducer for middleware
+const store = createStore(rootReducer, applyMiddleware(logger));
 // Create Redux store with the reducer
 // const store = createStore(reducer);
 // Log initial state
 console.log("initialState", store.getState());
 
 // Subscribe to state changes
-const unsubscribe = store.subscribe(() => console.log("Updated State", store.getState()));
-
+// const unsubscribe = store.subscribe(() => console.log("Updated State", store.getState()));
+// Subscribe to state changes for middle ware
+const unsubscribe = store.subscribe(() => {});
 // Dispatch actions
 store.dispatch(orderCake());
 store.dispatch(orderCake());
