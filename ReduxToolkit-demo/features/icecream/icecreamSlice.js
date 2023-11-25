@@ -1,3 +1,5 @@
+const cakeActions = require("../../features/cake/cakeSlice").cakeActions;
+
 //1-import createSlice from toolkit library
 const createSlice = require("@reduxjs/toolkit").createSlice;
 //2-creat slice with createSlice function for features(here is icecream)
@@ -15,6 +17,17 @@ const icecreamSlice = createSlice({
     restoked: (state, action) => {
       state.numOfIcecream += action.payload;
     },
+  },
+  // extraReducers: {
+  //   ["cake/ordered"]: (state) => {
+  //     state.numOfIcecream--;
+  //   },
+  // },
+
+  extraReducers: (builder) => {
+    builder.addCase(cakeActions.ordered, (state) => {
+      state.numOfIcecream--;
+    });
   },
 });
 //3-export reducer as export default and action as name export
