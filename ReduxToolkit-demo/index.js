@@ -2,13 +2,11 @@
 const store = require("./app/store.js");
 const cakeActions = require("./features/cake/cakeSlice.js").cakeActions;
 const icecreamActions = require("./features/icecream/icecreamSlice.js").icecreamActions;
-//8-log initialvalue of each slice 
+//8-log initialvalue of each slice
 console.log("initial state", store.getState());
-//9-log update value after each action 
-const unsubscribe = store.subscribe(() => {
-  console.log("updated state", store.getState());
-});
-//10-use dispatch to call action 
+//9-log update value after each action
+const unsubscribe = store.subscribe(() => {});
+//10-use dispatch to call action
 store.dispatch(cakeActions.ordered());
 store.dispatch(cakeActions.ordered());
 store.dispatch(cakeActions.ordered());
